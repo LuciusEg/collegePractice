@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace documentation;
+namespace documentation.Models;
 
 public partial class Document
 {
