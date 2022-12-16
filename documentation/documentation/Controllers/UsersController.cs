@@ -23,9 +23,10 @@ namespace documentation.Controllers
 
         //Продолжить работу тут
         // GET: api/Users
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<User>>> GetUsers()
-        //{
-        //}
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        {
+            return BadRequest();
+        }
     }
 }

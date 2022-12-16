@@ -24,15 +24,10 @@ namespace documentation.Controllers
 
         //Продолжить работу тут
         // GET: api/Documents
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Document>>> GetDocuments()
-        //{
-        //}
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Document>>> GetDocuments()
         {
-            return await _context.Documents.ToListAsync();
+            return BadRequest();
         }
     }
 }
