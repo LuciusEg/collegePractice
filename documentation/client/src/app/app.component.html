@@ -57,17 +57,25 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  
+  <style>
+    p.dline {
+     line-height: 1.5;
+    }
+    P {
+     line-height: 0.9em;
+    }
+    .left_block__p{
+    line-height: 20px
+}
+   </style>
 <div class="wrapper">
-    <div id="newsletter"> 
-     <h2>Карточка пользователя</h2>
-     <form method="" action="#">
-     <input type="text" placeholder="Имя">
-     <input type="text" placeholder="Фамилия">
-     <input type="text" placeholder="Отчество">
-     <input type="text" placeholder="Роль в системе">
-     <input type="text" placeholder="Должность">
-     <input type="text" placeholder="Подразделение">
-     </form>
-   </div>
- </div>
+  <div id="newsletter"> 
+    <h2>Карточка пользователя</h2>
+    <input type="text" placeholder="Имя">
+    <input type="text" placeholder="Фамилия">
+    <input type="text" placeholder="Отчество">
+    <input type="text" placeholder="Роль в системе">
+    <input type="text" placeholder="Должность">
+    <input type="text" placeholder="Подразделение">
+  </div>
+</div>

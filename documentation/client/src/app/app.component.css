@@ -34,12 +34,18 @@ input, button{
   
 input{
   width: 30%;
+  padding: 0 15px; /* отступ справа и слева 20px */
   background-color: #7ec4ce;
+  
 }
 
 input[placeholder] {
   color: #fff;
   }
+
+.text-block {
+  margin-left:20px;
+}
 
 input[type="text"]::-webkit-input-placeholder {
     color: #fff;
@@ -47,21 +53,9 @@ input[type="text"]::-webkit-input-placeholder {
    input[type="text"]::-moz-placeholder {
     color: #fff;
 }
-
-button {
-    padding: 9px 18px;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-  color: #fff;
-    background-color: #7ec4ce;
-} 
-
-/* Smartphone + Tablet
----------------------------------- */
 @media screen and (min-width:240px) and (max-width:615px) {
   
-  input, button{
+  input{
   display: block;
   margin: 10px auto;
 }
@@ -69,4 +63,3 @@ button {
   input{min-width:220px;}
   
 }
-  
