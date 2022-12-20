@@ -31,11 +31,19 @@ input, button{
   margin-right:10px;
   border: none;
   }
-  
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
 input{
-  width: 30%;
-  padding: 0 15px; /* отступ справа и слева 20px */
-  background-color: #7ec4ce;
+  width: 70%;
+  padding: 0 14px; /* отступ справа и слева 20px */
+
   
 }
 

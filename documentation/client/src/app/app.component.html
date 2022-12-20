@@ -71,11 +71,33 @@
 <div class="wrapper">
   <div id="newsletter"> 
     <h2>Карточка пользователя</h2>
-    <input type="text" placeholder="Имя">
-    <input type="text" placeholder="Фамилия">
-    <input type="text" placeholder="Отчество">
-    <input type="text" placeholder="Роль в системе">
-    <input type="text" placeholder="Должность">
-    <input type="text" placeholder="Подразделение">
+    <mat-form-field floatLabel = "auto" hideRequiredMarker appearance="fill">
+      <mat-label> Имя </mat-label>
+      <input matInput required/>
+    </mat-form-field>
+    <mat-form-field floatLabel = "auto" hideRequiredMarker appearance="fill">
+      <mat-label>Фамилия</mat-label>
+      <input matInput required/>
+    </mat-form-field>
+
+    <mat-form-field floatLabel = "auto" hideRequiredMarker appearance="fill">
+      <mat-label>Отчество</mat-label>
+      <input matInput required/>
+    </mat-form-field>
+
+    <mat-form-field floatLabel = "auto" hideRequiredMarker appearance="fill">
+      <mat-label>Роль в системе</mat-label>
+      <input matInput required/>
+    </mat-form-field>
+
+    <mat-form-field floatLabel = "auto" hideRequiredMarker appearance="fill">
+      <mat-label>Должность</mat-label>
+      <input matInput required/>
+    </mat-form-field>
+
+    <mat-form-field floatLabel = "auto" hideRequiredMarker appearance="fill">
+      <mat-label>Подразделение</mat-label>
+      <input matInput required/>
+    </mat-form-field>
   </div>
 </div>
