@@ -3,19 +3,13 @@ table {
 }
 
 @import url('https://fonts.googleapis.com/css?family=Marck+Script');
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Marck Script', sans-serif;
-  color: #fff;
- }
-  
+
 .wrapper{
   width: 100%; 
   background-color: #7eadbe;
 }
 
-#newsletter{
+#card{
   padding:20px 0;
   text-align:center;
 }
@@ -24,50 +18,5 @@ h2 {
   font-size: 30px;
  }
 
-input, button{
-  display:inline-block;
-  outline:none;
-  padding: 9px 18px;
-  margin-right:10px;
-  border: none;
-  }
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
-}
 
-.example-full-width {
-  width: 100%;
-}
-input{
-  width: 70%;
-  padding: 0 14px; /* отступ справа и слева 20px */
 
-  
-}
-
-input[placeholder] {
-  color: #fff;
-  }
-
-.text-block {
-  margin-left:20px;
-}
-
-input[type="text"]::-webkit-input-placeholder {
-    color: #fff;
- } 
-   input[type="text"]::-moz-placeholder {
-    color: #fff;
-}
-@media screen and (min-width:240px) and (max-width:615px) {
-  
-  input{
-  display: block;
-  margin: 10px auto;
-}
-  
-  input{min-width:220px;}
-  
-}
