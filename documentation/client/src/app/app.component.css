@@ -1,10 +1,12 @@
-table {
-  width: 100%;
-}
-
 @import url('https://fonts.googleapis.com/css?family=Marck+Script');
-
-.wrapper{
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Marck Script', sans-serif;
+  color: #fff;
+ }
+  
+.mein{
   width: 100%; 
   background-color: #7eadbe;
 }
@@ -18,5 +20,27 @@ h2 {
   font-size: 30px;
  }
 
+ mat-form-field{
+  display:inline-block;
+  outline:none;
+  margin-right:18px;
+  border: none;
+  }
+  
+  mat-form-field {
+  width: 40%;
+}
 
+/* Smartphone + Tablet
+---------------------------------- */
+@media screen and (min-width:200px) and (max-width:1000px) {
+  
+  mat-form-field{
+  display: block;
+  margin: 10px auto;
+}
+  
+mat-form-field{min-width:440px;}
+  
+}
 
