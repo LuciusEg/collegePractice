@@ -38,21 +38,17 @@ namespace documentation.Controllers
         }
 
         //работает
-        [HttpGet("oneUser")]
-        public async Task<ActionResult<User>> oneUser(long id)
+        [HttpGet("oneUsers")]
+        public async Task<ActionResult<IEnumerable<User>>> oneUsers(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-            
-            return UserTO(user);
+            return await _context.Users
+               .Select(x => UserTO(x))
+               .ToListAsync();
         }
 
-        [HttpPost("createUser")]
-        public async Task<ActionResult> createUser(User userTO)
+        //работает
+        [HttpPost("createUsers")]
+        public async Task<ActionResult<IEnumerable<User>>> createUsers(User userTO)
         {
             var user = new User
             {
@@ -73,10 +69,10 @@ namespace documentation.Controllers
                 UserTO(user));
         }
         //работает
-        [HttpPut("UpdateUser")]
-        public async Task<ActionResult> UpdateUser(int id,  User userTO)
+        [HttpPut("UpdateUsers")]
+        public async Task<ActionResult<IEnumerable<User>>> UpdateUsers(int id, [Bind("Id,FirstName,LastName,MiddleName,Role,JobTitle,Department")] User user)
         {
-            if (id != userTO.Id)
+            if (id != user.Id)
             {
                 return NotFound();
             }
@@ -85,12 +81,12 @@ namespace documentation.Controllers
             {
                 try
                 {
-                    _context.Update(userTO);
+                    _context.Update(user);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExist(userTO.Id))
+                    if (!UserExist(user.Id))
                     {
                         return NotFound();
                     }
@@ -99,14 +95,14 @@ namespace documentation.Controllers
                         throw;
                     }
                 }
-                return Ok("Обновлено");
+                return RedirectToAction(nameof(Index));
             }
             return NoContent();
         }
 
         //работает
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteUser(int id)
+        [HttpDelete("DeleteUsers")]
+        public async Task<ActionResult<IEnumerable<User>>> DeleteUsers(int id)
         {
             var todoItem = await _context.Users.FindAsync(id);
 
