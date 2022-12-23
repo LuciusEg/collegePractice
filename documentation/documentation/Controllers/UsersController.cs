@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using documentation;
 using documentation.Models;
 
+
 namespace documentation.Controllers
 {
     [Route("api/[controller]")]
@@ -20,7 +21,7 @@ namespace documentation.Controllers
         {
             _context = context;
         }
-
+        //не забыть поменять подключение к бд
         //Продолжить работу тут
         // GET: api/Users
         [HttpGet]
@@ -37,17 +38,21 @@ namespace documentation.Controllers
         }
 
         //работает
-        [HttpGet("oneUsers")]
-        public async Task<ActionResult<IEnumerable<User>>> oneUsers(int id)
+        [HttpGet("oneUser")]
+        public async Task<ActionResult<User>> oneUser(long id)
         {
-            return await _context.Users
-               .Select(x => UserTO(x))
-               .ToListAsync();
+            var user = await _context.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            
+            return UserTO(user);
         }
 
-        //работает
-        [HttpPost("createUsers")]
-        public async Task<ActionResult<IEnumerable<User>>> createUsers(User userTO)
+        [HttpPost("createUser")]
+        public async Task<ActionResult> createUser(User userTO)
         {
             var user = new User
             {
@@ -68,10 +73,10 @@ namespace documentation.Controllers
                 UserTO(user));
         }
         //работает
-        [HttpPut("UpdateUsers")]
-        public async Task<ActionResult<IEnumerable<User>>> UpdateUsers(int id, [Bind("Id,FirstName,LastName,MiddleName,Role,JobTitle,Department")] User user)
+        [HttpPut("UpdateUser")]
+        public async Task<ActionResult> UpdateUser(int id,  User userTO)
         {
-            if (id != user.Id)
+            if (id != userTO.Id)
             {
                 return NotFound();
             }
@@ -80,12 +85,12 @@ namespace documentation.Controllers
             {
                 try
                 {
-                    _context.Update(user);
+                    _context.Update(userTO);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExist(user.Id))
+                    if (!UserExist(userTO.Id))
                     {
                         return NotFound();
                     }
@@ -94,14 +99,14 @@ namespace documentation.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Ok("Обновлено");
             }
             return NoContent();
         }
 
         //работает
-        [HttpDelete("DeleteUsers")]
-        public async Task<ActionResult<IEnumerable<User>>> DeleteUsers(int id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteUser(int id)
         {
             var todoItem = await _context.Users.FindAsync(id);
 

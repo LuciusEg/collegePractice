@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<DocumentationContext>(o => o.UseNpgsql("Host=localhost;Port=5432;Database=documentation;Username=postgres;Password=1qazxsw2"));
+builder.Services.AddDbContext<DocumentationContext>(o => o.UseNpgsql("Host=localhost;Port=5432;Database=TEST_BD;Username=postgres;Password=1111"));
 
 builder.Services.AddScoped<UsersController>();
 builder.Services.AddScoped<UsersController>();
