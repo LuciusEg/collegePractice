@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -44,6 +45,7 @@ export class AppComponent {
     }, error => console.error(error));
   }
 }
+
 
 interface WeatherForecast {
   date: string;
