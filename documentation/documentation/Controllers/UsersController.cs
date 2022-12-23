@@ -52,7 +52,7 @@ namespace documentation.Controllers
         }
 
         [HttpPost("createUser")]
-        public async Task<ActionResult<IEnumerable<User>>> createUser(User userTO)
+        public async Task<ActionResult> createUser(User userTO)
         {
             var user = new User
             {
@@ -74,7 +74,7 @@ namespace documentation.Controllers
         }
         //работает
         [HttpPut("UpdateUser")]
-        public async Task<ActionResult<IEnumerable<User>>> UpdateUser(int id,  User userTO)
+        public async Task<ActionResult> UpdateUser(int id,  User userTO)
         {
             if (id != userTO.Id)
             {
@@ -99,14 +99,14 @@ namespace documentation.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Ok("Обновлено");
             }
             return NoContent();
         }
 
         //работает
-        [HttpDelete("DeleteUsers")]
-        public async Task<ActionResult<IEnumerable<User>>> DeleteUsers(int id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteUser(int id)
         {
             var todoItem = await _context.Users.FindAsync(id);
 
