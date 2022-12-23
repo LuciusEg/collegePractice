@@ -39,9 +39,9 @@ namespace documentation.Controllers
 
         //работает
         [HttpGet("oneUser")]
-        public async Task<ActionResult<User>> oneUser(long id)
+        public async Task<ActionResult<UserDTO>> oneUser(long Id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users.FindAsync(Id);
 
             if (user == null)
             {
@@ -52,16 +52,16 @@ namespace documentation.Controllers
         }
 
         [HttpPost("createUser")]
-        public async Task<ActionResult> createUser(User userTO)
+        public async Task<ActionResult> createUser(User UserDTO)
         {
             var user = new User
             {
-                FirstName = userTO.FirstName,
-                LastName = userTO.LastName,
-                MiddleName = userTO.MiddleName,
-                Role = userTO.Role,
-                JobTitle = userTO.JobTitle,
-                Department = userTO.Department
+                FirstName = UserDTO.FirstName,
+                LastName = UserDTO.LastName,
+                MiddleName = UserDTO.MiddleName,
+                Role = UserDTO.Role,
+                JobTitle = UserDTO.JobTitle,
+                Department = UserDTO.Department
             };
 
             _context.Users.Add(user);
@@ -74,9 +74,9 @@ namespace documentation.Controllers
         }
         //работает
         [HttpPut("UpdateUser")]
-        public async Task<ActionResult> UpdateUser(int id,  User userTO)
+        public async Task<ActionResult> UpdateUser(int id,  User UserDTO)
         {
-            if (id != userTO.Id)
+            if (id != UserDTO.Id)
             {
                 return NotFound();
             }
@@ -85,12 +85,12 @@ namespace documentation.Controllers
             {
                 try
                 {
-                    _context.Update(userTO);
+                    _context.Update(UserDTO);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExist(userTO.Id))
+                    if (!UserExist(UserDTO.Id))
                     {
                         return NotFound();
                     }
@@ -105,7 +105,7 @@ namespace documentation.Controllers
         }
 
         //работает
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteUser")]
         public async Task<ActionResult> DeleteUser(int id)
         {
             var todoItem = await _context.Users.FindAsync(id);
@@ -118,7 +118,7 @@ namespace documentation.Controllers
             _context.Users.Remove(todoItem);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("Удалено");
         }
 
         private bool UserExist(long id)
@@ -126,8 +126,8 @@ namespace documentation.Controllers
             return _context.Users.Any(e => e.Id == id);
         }
 
-        private static User UserTO(User user) =>
-            new User
+        private static UserDTO UserTO(User user) =>
+            new UserDTO
             {
                 Id = user.Id,
                 FirstName = user.FirstName,
