@@ -1,46 +1,38 @@
-@import url('https://fonts.googleapis.com/css?family=Marck+Script');
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Marck Script', sans-serif;
-  color: #fff;
- }
-  
-.mein{
-  width: 100%; 
-  background-color: #7eadbe;
+
+.mein{ /*Описываем класс меин*/
+  width: 100%; /*Задаем ширину*/
+  background-color: #7eadbe; /*Задаем цвет*/
 }
 
 #card{
-  padding:20px 0;
-  text-align:center;
+  padding:20px 0; /*Отступы */
+  text-align:center; /*Текст в центре*/
 }
 
 h2 {
-  font-size: 30px;
+  font-size: 30px; /*Размер*/
  }
 
- mat-form-field{
-  display:inline-block;
+ mat-form-field{ /*Задаем значения инпутам */
+  display:inline-block; 
   outline:none;
-  margin-right:18px;
+  margin-right:18px; /*Отступ */
   border: none;
   }
   
   mat-form-field {
-  width: 40%;
+  width: 40%; /*Ширина */
 }
 
 /* Smartphone + Tablet
 ---------------------------------- */
-@media screen and (min-width:200px) and (max-width:1000px) {
+@media screen and (min-width:200px) and (max-width:1000px) { /*Перенос строчек если уменьшили вкладку*/
   
-  mat-form-field{
-  display: block;
-  margin: 10px auto;
+  mat-form-field{ /*Задаем значение инпутам*/
+  display: block;/*Поля идут друг за другом */
+  margin: 10px auto; /*Отступы между полями */
 }
   
 mat-form-field{min-width:440px;}
   
 }
-
