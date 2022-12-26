@@ -1,64 +1,38 @@
-﻿<h1 id="tableLabel">Weather forecast</h1>
+﻿
+      <div class="mein"> <!-- Объявляем класс меин-->
+        <div id="card"> 
+         <h2>Карточка пользователя</h2> <!--Заголовок-->
+         <form method="" action="#"><!--Объявляем метод-->
+          <mat-form-field floatLabel = "auto" hideRequiredMarker appearance="fill"> <!--Задаем инпут-->
+            <mat-label> Имя </mat-label>
+            <input matInput required/>
+          </mat-form-field>
+          <mat-form-field floatLabel = "auto" hideRequiredMarker appearance="fill"><!--Задаем инпут-->
+            <mat-label>Фамилия</mat-label>
+            <input matInput required/>
+          </mat-form-field>
+      
+          <mat-form-field floatLabel = "auto" hideRequiredMarker appearance="fill"><!--Задаем инпут-->
+            <mat-label>Отчество</mat-label>
+            <input matInput required/>
+          </mat-form-field>
+      
+          <mat-form-field floatLabel = "auto" hideRequiredMarker appearance="fill"><!--Задаем инпут-->
+            <mat-label>Роль в системе</mat-label>
+            <input matInput required/>
+          </mat-form-field>
+      
+          <mat-form-field floatLabel = "auto" hideRequiredMarker appearance="fill"><!--Задаем инпут-->
+            <mat-label>Должность</mat-label>
+            <input matInput require/>
+          </mat-form-field>
+      
+          <mat-form-field floatLabel = "auto" hideRequiredMarker appearance="fill"><!--Задаем инпут-->
+            <mat-label>Подразделение</mat-label>
+            <input matInput required/>
+          </mat-form-field>
+         </form>
 
-<p>Этот компонент демонстрирует получение данных с сервера.</p>
-
-<p>Мы тоже что-то сделали</p>
-
-<p *ngIf="!forecasts"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em></p>
-
-<button (click)="refreshForecast()"> Обновить</button>
-<table *ngIf="forecasts">
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let forecast of forecasts">
-            <td>{{ forecast.date }}</td>
-            <td>{{ forecast.temperatureC }}</td>
-            <td>{{ forecast.temperatureF }}</td>
-            <td>{{ forecast.summary }}</td>
-        </tr>
-    </tbody>
-</table>
-
-  
-<div class="mein">
-  <div id="card"> 
-   <h2>Карточка пользователя</h2>
-   <form method="" action="#">
-    <mat-form-field floatLabel = "auto" hideRequiredMarker appearance="fill">
-      <mat-label> Имя </mat-label>
-      <input matInput required/>
-    </mat-form-field>
-    <mat-form-field floatLabel = "auto" hideRequiredMarker appearance="fill">
-      <mat-label>Фамилия</mat-label>
-      <input matInput required/>
-    </mat-form-field>
-
-    <mat-form-field floatLabel = "auto" hideRequiredMarker appearance="fill">
-      <mat-label>Отчество</mat-label>
-      <input matInput required/>
-    </mat-form-field>
-
-    <mat-form-field floatLabel = "auto" hideRequiredMarker appearance="fill">
-      <mat-label>Роль в системе</mat-label>
-      <input matInput required/>
-    </mat-form-field>
-
-    <mat-form-field floatLabel = "auto" hideRequiredMarker appearance="fill">
-      <mat-label>Должность</mat-label>
-      <input matInput required/>
-    </mat-form-field>
-
-    <mat-form-field floatLabel = "auto" hideRequiredMarker appearance="fill">
-      <mat-label>Подразделение</mat-label>
-      <input matInput required/>
-    </mat-form-field>
-   </form>
- </div>
-</div>
+       </div>
+      </div>
+    
