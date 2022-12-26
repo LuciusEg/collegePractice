@@ -77,9 +77,9 @@ namespace documentation.Controllers
         }
         //работает
         [HttpPut("UpdateUser")]
-        public async Task<ActionResult<UserDTO>> UpdateUser(int id, User userDTO)
+        public async Task<ActionResult> UpdateUser(int id, UserDTO UserDTO)
         {
-            if (id != userDTO.Id)
+            if (id != UserDTO.Id)
             {
                 return BadRequest();
             }
@@ -90,12 +90,12 @@ namespace documentation.Controllers
                 return NotFound();
             }
 
-            user.FirstName = userDTO.FirstName;
-            user.LastName = userDTO.LastName;
-            user.MiddleName = userDTO.MiddleName;
-            user.Role = userDTO.Role;
-            user.JobTitle = userDTO.JobTitle;
-            user.Department = userDTO.Department;
+            user.FirstName = UserDTO.FirstName;
+            user.LastName = UserDTO.LastName;
+            user.MiddleName = UserDTO.MiddleName;
+            user.Role = UserDTO.Role;
+            user.JobTitle = UserDTO.JobTitle;
+            user.Department = UserDTO.Department;
 
             try
             {
