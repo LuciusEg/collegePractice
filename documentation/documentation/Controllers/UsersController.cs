@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using documentation;
 using documentation.Models;
+using System.Data;
 
 
 namespace documentation.Controllers
@@ -76,34 +77,36 @@ namespace documentation.Controllers
         }
         //работает
         [HttpPut("UpdateUser")]
-        public async Task<ActionResult> UpdateUser(int id, UserDTO UserDTO)
+        public async Task<ActionResult<UserDTO>> UpdateUser(int id, User userDTO)
         {
-            if (id != UserDTO.Id)
+            if (id != userDTO.Id)
+            {
+                return BadRequest();
+            }
+
+            var user= await _context.Users.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            user.FirstName = userDTO.FirstName;
+            user.LastName = userDTO.LastName;
+            user.MiddleName = userDTO.MiddleName;
+            user.Role = userDTO.Role;
+            user.JobTitle = userDTO.JobTitle;
+            user.Department = userDTO.Department;
+
+            try
             {
-                try
-                {
-                    _context.Update(UserDTO);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExist(UserDTO.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return Ok("Обновлено");
+                await _context.SaveChangesAsync();
             }
-            return NoContent();
+            catch (DbUpdateConcurrencyException) when (!UserExist(id))
+            {
+                return NotFound();
+            }
+
+            return Ok("Обновлено");
         }
 
         //работает
