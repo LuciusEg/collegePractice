@@ -54,7 +54,7 @@ namespace documentation.Controllers
         }
 
         [HttpPost("createUser")]
-        public async Task<ActionResult> createUser(User UserDTO)
+        public async Task<ActionResult<UserDTO>> createUser(UserDTO UserDTO)
         {
             var user = new User
             {
@@ -76,7 +76,7 @@ namespace documentation.Controllers
         }
         //работает
         [HttpPut("UpdateUser")]
-        public async Task<ActionResult> UpdateUser(int id,  User UserDTO)
+        public async Task<ActionResult> UpdateUser(int id, UserDTO UserDTO)
         {
             if (id != UserDTO.Id)
             {
@@ -110,14 +110,14 @@ namespace documentation.Controllers
         [HttpDelete("DeleteUser")]
         public async Task<ActionResult> DeleteUser(int id)
         {
-            var todoItem = await _context.Users.FindAsync(id);
+            var user = await _context.Users.FindAsync(id);
 
-            if (todoItem == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(todoItem);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
             return Ok("Удалено");
