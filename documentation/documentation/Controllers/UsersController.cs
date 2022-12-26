@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using documentation;
 using documentation.Models;
+using System.Data;
 
 
 namespace documentation.Controllers
@@ -25,23 +26,25 @@ namespace documentation.Controllers
         //Продолжить работу тут
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers()
         {
             return BadRequest();
         }
 
         //вывод всех пользователей, работает
         [HttpGet("allUsers")]
-        public async Task<ActionResult<IEnumerable<User>>> allUsers()
-        { 
-            return await _context.Users.ToListAsync();
+        public async Task<ActionResult<IEnumerable<UserDTO>>> allUsers()
+        {
+            return await _context.Users
+                .Select(x => UserTO(x))
+                .ToListAsync();
         }
 
         //работает
         [HttpGet("oneUser")]
-        public async Task<ActionResult<User>> oneUser(long id)
+        public async Task<ActionResult<UserDTO>> oneUser(long Id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users.FindAsync(Id);
 
             if (user == null)
             {
@@ -52,16 +55,16 @@ namespace documentation.Controllers
         }
 
         [HttpPost("createUser")]
-        public async Task<ActionResult> createUser(User userTO)
+        public async Task<ActionResult<UserDTO>> createUser(UserDTO UserDTO)
         {
             var user = new User
             {
-                FirstName = userTO.FirstName,
-                LastName = userTO.LastName,
-                MiddleName = userTO.MiddleName,
-                Role = userTO.Role,
-                JobTitle = userTO.JobTitle,
-                Department = userTO.Department
+                FirstName = UserDTO.FirstName,
+                LastName = UserDTO.LastName,
+                MiddleName = UserDTO.MiddleName,
+                Role = UserDTO.Role,
+                JobTitle = UserDTO.JobTitle,
+                Department = UserDTO.Department
             };
 
             _context.Users.Add(user);
@@ -74,51 +77,53 @@ namespace documentation.Controllers
         }
         //работает
         [HttpPut("UpdateUser")]
-        public async Task<ActionResult> UpdateUser(int id,  User userTO)
+        public async Task<ActionResult> UpdateUser(int id, UserDTO UserDTO)
         {
-            if (id != userTO.Id)
+            if (id != UserDTO.Id)
+            {
+                return BadRequest();
+            }
+
+            var user= await _context.Users.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            user.FirstName = UserDTO.FirstName;
+            user.LastName = UserDTO.LastName;
+            user.MiddleName = UserDTO.MiddleName;
+            user.Role = UserDTO.Role;
+            user.JobTitle = UserDTO.JobTitle;
+            user.Department = UserDTO.Department;
+
+            try
             {
-                try
-                {
-                    _context.Update(userTO);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExist(userTO.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return Ok("Обновлено");
+                await _context.SaveChangesAsync();
             }
-            return NoContent();
+            catch (DbUpdateConcurrencyException) when (!UserExist(id))
+            {
+                return NotFound();
+            }
+
+            return Ok("Обновлено");
         }
 
         //работает
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteUser")]
         public async Task<ActionResult> DeleteUser(int id)
         {
-            var todoItem = await _context.Users.FindAsync(id);
+            var user = await _context.Users.FindAsync(id);
 
-            if (todoItem == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(todoItem);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("Удалено");
         }
 
         private bool UserExist(long id)
@@ -126,8 +131,8 @@ namespace documentation.Controllers
             return _context.Users.Any(e => e.Id == id);
         }
 
-        private static User UserTO(User user) =>
-            new User
+        private static UserDTO UserTO(User user) =>
+            new UserDTO
             {
                 Id = user.Id,
                 FirstName = user.FirstName,
