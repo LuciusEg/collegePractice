@@ -25,16 +25,18 @@ namespace documentation.Controllers
         //Продолжить работу тут
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers()
         {
             return BadRequest();
         }
 
         //вывод всех пользователей, работает
         [HttpGet("allUsers")]
-        public async Task<ActionResult<IEnumerable<User>>> allUsers()
-        { 
-            return await _context.Users.ToListAsync();
+        public async Task<ActionResult<IEnumerable<UserDTO>>> allUsers()
+        {
+            return await _context.Users
+                .Select(x => UserTO(x))
+                .ToListAsync();
         }
 
         //работает
