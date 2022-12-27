@@ -125,6 +125,19 @@ namespace documentation.Controllers
 
             return Ok("Удалено");
         }
+        //
+        [HttpGet("DocumentsByAuthor")]
+        public async Task<ActionResult> GetDocumentsByAuthor(long authorId)
+        {
+            var user = await _context.Users.FindAsync(Id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return UserTO(user);
+        }
 
         private bool UserExist(long id)
         {
@@ -133,6 +146,18 @@ namespace documentation.Controllers
 
         private static UserDTO UserTO(User user) =>
             new UserDTO
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                MiddleName = user.MiddleName,
+                Role = user.Role,
+                JobTitle = user.JobTitle,
+                Department = user.Department
+            };
+        //dto document
+        private static DocumentDTO DocumentTO(User user) =>
+            new DocumentDTO
             {
                 Id = user.Id,
                 FirstName = user.FirstName,
